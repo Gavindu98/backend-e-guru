@@ -6,7 +6,7 @@ const registerHandler  = require('../controllers/authControllers/registerControl
 const loginHandler  = require('../controllers/authControllers/loginController')
 
 
-
+//comment
 router.route('/register').post(pwdValidation,registerHandler)
 router.route('/login').post(loginHandler)
 
