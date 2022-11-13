@@ -5,7 +5,7 @@ const postViewHandler = async (req, res) => {
     if(!userEmail) return res.status(400).json({success:false, message:'user not found'})
 
     try {
-        const posts = await Post.find({creator:userEmail})
+        const posts = await Post.find()
         // console.log(posts);
         res.status(200).json({success:true, message:'All posts are received', posts:posts}) 
     } catch (error) {
