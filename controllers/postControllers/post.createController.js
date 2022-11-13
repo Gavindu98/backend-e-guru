@@ -14,7 +14,7 @@ const postCreateHandler = async (req, res) => {
     const { filename } = req.file
     if(!filename) return res.status(410)
     // console.log(filename);
-    const localStoreDestination = path.join(__dirname, '..', '..', `storage/images/${filename}`, )
+    const localStoreDestination = path.join(process.env.VIKUM_DIR, `storage/images/${filename}`, )
     // console.log(dest);
     // return res.status(200).json({success: true})
     try {
