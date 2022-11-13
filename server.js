@@ -1,5 +1,7 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
+const bodyparser = require('body-parser')
 const app = express()
 const dbConnect = require('./config/dbConnection')
 
@@ -10,8 +12,10 @@ dbConnect()
 
 // middleware for json
 app.use(express.json())
+app.use(cors())
 
 app.use('/api/auth', require('./routes/authRouter'))
+app.use('/api/post', require('./routes/private/postRouter'))
 
 
 const port = process.env.PORT || 8080

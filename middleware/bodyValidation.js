@@ -1,4 +1,4 @@
-const { body } = require('express-validator')
+const { body, check } = require('express-validator')
 
 const pwdValidation = (req, res, next) => {
     if(!body(req.body.pwd).isLength({ min:8 })){
@@ -7,8 +7,10 @@ const pwdValidation = (req, res, next) => {
 
     // need regx for validation password field
         
-    console.log('Moved onto register controller controller');
+    console.log('Moved onto register controller');
     next()
 }
 
-module.exports = pwdValidation
+module.exports = {
+    pwdValidation
+}

@@ -21,7 +21,9 @@ const loginHandler = async (req, res) => {
                 const accessToken = jwt.sign(
                     { 
                         "email": foundUser.email,
-                        "role": userRole,
+                        "role": [
+                            userRole
+                        ],
                         "userID": foundUser._id
                     },
                     process.env.ACCESS_TOKEN_SECRET,
@@ -38,7 +40,7 @@ const loginHandler = async (req, res) => {
                 foundUser.refreshToken = refreshToken
                 const result = await foundUser.save()
                 res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000  } )
-                res.status(200).json({ accessToken, "email": result.email, "id": result._id , "firstname": result.firstname, "lastname": result.lastname })
+                res.status(200).json({ accessToken, "email": result.email, "id": result._id , "firstname": result.firstname, "lastname": result.lastname, "role": result.role })
         } catch (error) {
             res.status(500).json({success: false, message: error.message}) 
         }
