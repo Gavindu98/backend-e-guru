@@ -21,23 +21,26 @@ const postCreateHandler = async (req, res) => {
     // console.log(localStoreDestination);
     // return res.status(200).json({success: true})
     try {
+        const user = await User.findOne({email:creatorMail})
         // save post to db
         const newPost = await Post.create({
             "title": title,
             "description": description,
-            "creator": creatorMail,
+            "creator": {
+                "email": creatorMail,
+                "firstname": user.firstname,
+                "lastname": user.lastname
+            },
             "filePath": localStoreDestination
         })
 
         const post = await Post.findById(newPost._id)
-        const user = await User.findOne({email:creatorMail})
+        
         // console.log(user.firstname);
         // console.log(newPost);
         res.status(201).json({
             success:true, 
             message: 'Post has been created',
-            firstName:user.firstname,
-            lastName:user.lastname,
             post : post
         })
     } catch (error) {
