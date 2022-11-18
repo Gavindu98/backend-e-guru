@@ -19,7 +19,7 @@ const postDeleteHandler = async (req, res) => {
         const post = await Post.findById(postID)
         const pathLocation = post.filePath
         if(!post) return res.status(404).json({success:false, message:'Post is not found'})
-        if(post.creator != authorizedEmail) return res.status(401).json({success:false, message:'Unauthorized try'})
+        if(post.creator.email != authorizedEmail) return res.status(401).json({success:false, message:'Unauthorized try'})
         // console.log(post);
 
         // deletion of document

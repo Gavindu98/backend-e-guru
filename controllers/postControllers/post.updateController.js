@@ -15,7 +15,7 @@ const postUpdateHandler = async (req, res) => {
         const post = await Post.findById(postID)
         const pathLocation = post.filePath
         // console.log(post.creator);
-        if(post.creator != authorizedEmail) return res.status(401).json({success:false, message:'Unauthorized try'})
+        if(post.creator.email != authorizedEmail) return res.status(401).json({success:false, message:'Unauthorized try'})
         if (!req.file) {
             post.title = titleUpdated
             post.description = descriptionUpdated

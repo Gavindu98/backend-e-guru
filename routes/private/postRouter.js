@@ -14,8 +14,8 @@ const USER_ROLES = require('../../config/userRoles')
 
 // tutor's routes
 router.route('/post-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), fileUploader.single('file'), postCreateHandler)
-router.route('/post-update').put(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), fileUploader.single('fileUpdate'), postUpdateHandler)
-router.route('/post-delete').put(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postDeleteHandler)
+router.route('/post-update').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), fileUploader.single('fileUpdate'), postUpdateHandler)
+router.route('/post-delete').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postDeleteHandler)
 router.route('/post-all-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postAllViewHandler)
 router.route('/post-single-view/:postID').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postSingleViewHandler)
 router.route('/post-like/:postID/action-owner/:userID/state/:booleanState').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR,USER_ROLES.STUDENT), postLikeHandler)
