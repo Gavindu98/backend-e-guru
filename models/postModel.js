@@ -18,6 +18,10 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
+    likeArray:{
+        type:[],
+        default: []
+    },
     likeCount: {
         type: Number,
         default: 0
