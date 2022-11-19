@@ -30,7 +30,7 @@ const postLikeHandler = async (req, res) => {
         // console.log(booleanState==="true" && arrayCheck(post.likeArray, userID));
         // like array creation
         if (booleanState==="true" && arrayCheck(post.likeArray, userID)) {
-            return res.status(409).json({success:false, message:'Already liked'})
+            return res.status(409).json({success:true, message:'Already liked'})
                 
         }else if(booleanState==="true" && !arrayCheck(post.likeArray, userID)){
             post.likeArray.push(userID)
