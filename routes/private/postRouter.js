@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const postCreateHandler = require('../../controllers/postControllers/post.createController')
+const forumCreateHandler = require('../../controllers/forumControllers/forum.createController')
 const postUpdateHandler = require('../../controllers/postControllers/post.updateController')
 const postAllViewHandler = require('../../controllers/postControllers/post.all-viewController')
 const postSingleViewHandler = require('../../controllers/postControllers/post.single-viewController')
 const postLikeHandler = require('../../controllers/postControllers/post.likeController')
-const {postDeleteHandler} = require('../../controllers/postControllers/post.deleteController')
+const { postDeleteHandler } = require('../../controllers/postControllers/post.deleteController')
 const fileUploader = require('../../middleware/fileUploader')
 const { postBodyValidation } = require('../../middleware/bodyValidation')
 const verifyAccessToken = require('../../middleware/verifyJWT')
@@ -18,7 +19,7 @@ router.route('/post-update').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTO
 router.route('/post-delete').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postDeleteHandler)
 router.route('/post-all-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postAllViewHandler)
 router.route('/post-single-view/:postID').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postSingleViewHandler)
-router.route('/post-like/:postID/action-owner/:userID/state/:booleanState').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR,USER_ROLES.STUDENT), postLikeHandler)
-
+router.route('/post-like/:postID/action-owner/:userID/state/:booleanState').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postLikeHandler)
+router.route('/quection-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumCreateHandler)
 
 module.exports = router
