@@ -16,6 +16,7 @@ app.use(cors())
 
 app.use('/api/auth', require('./routes/authRouter'))
 app.use('/api/post', require('./routes/private/postRouter'))
+app.use('/api/post-comment', require('./routes/private/commentRouter'))
 
 
 const port = process.env.PORT || 8080
