@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const postCreateHandler = require('../../controllers/postControllers/post.createController')
 const forumCreateHandler = require('../../controllers/forumControllers/forum.createController')
+const forumAllViewHandler = require('../../controllers/forumControllers/forum.all-viewController')
 const postUpdateHandler = require('../../controllers/postControllers/post.updateController')
 const postAllViewHandler = require('../../controllers/postControllers/post.all-viewController')
 const postSingleViewHandler = require('../../controllers/postControllers/post.single-viewController')
@@ -21,5 +22,6 @@ router.route('/post-all-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUT
 router.route('/post-single-view/:postID').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postSingleViewHandler)
 router.route('/post-like/:postID/action-owner/:userID/state/:booleanState').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postLikeHandler)
 router.route('/quection-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumCreateHandler)
+router.route('/forum-quection-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumAllViewHandler)
 
 module.exports = router
