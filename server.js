@@ -17,6 +17,8 @@ app.use(cors())
 app.use('/api/auth', require('./routes/authRouter'))
 app.use('/api/post', require('./routes/private/postRouter'))
 app.use('/api/post-comment', require('./routes/private/commentRouter'))
+app.use('/api/lesson', require('./routes/private/lessonRouter'))
+app.use('/api/resource', require('./routes/private/resourceRouter'))
 
 
 const port = process.env.PORT || 8080
