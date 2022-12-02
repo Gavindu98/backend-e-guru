@@ -17,7 +17,7 @@ const quectionAnswersHandler = async (req, res) => {
                     createdAt: data.createdAt,
                     answerId: data._id,
                     firstName: data.creator.firstname,
-                    lastName: data.creator.lastName,
+                    lastName: data.creator.lastname,
                     email: data.creator.email,
                     answer: data.answer,
                     userId: data.userId,
