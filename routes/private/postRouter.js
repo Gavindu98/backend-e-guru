@@ -4,6 +4,7 @@ const postCreateHandler = require('../../controllers/postControllers/post.create
 const forumCreateHandler = require('../../controllers/forumControllers/forum.createController')
 const answerQuectionHandler = require('../../controllers/forumControllers/forum.answerQuectionsController')
 const forumAllViewHandler = require('../../controllers/forumControllers/forum.all-viewController')
+const quectionAnswersHandler = require('../../controllers/forumControllers/forum.quectionAnswersController')
 const postUpdateHandler = require('../../controllers/postControllers/post.updateController')
 const postAllViewHandler = require('../../controllers/postControllers/post.all-viewController')
 const postSingleViewHandler = require('../../controllers/postControllers/post.single-viewController')
@@ -26,5 +27,6 @@ router.route('/post-like/:postID/action-owner/:userID/state/:booleanState').post
 router.route('/quection-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumCreateHandler)
 router.route('/forum-quection-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumAllViewHandler)
 router.route('/forum-add-reply').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), answerQuectionHandler)
+router.route('/answers-for-singleQuection').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), quectionAnswersHandler)
 
 module.exports = router
