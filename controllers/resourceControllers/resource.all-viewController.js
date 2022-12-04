@@ -1,22 +1,22 @@
 const Resource = require('../../models/resourceModel')
 
 const resourceAllViewHandler = async (req, res) => {
-    const { subject } = req.body
+    const { booktype } = req.body
     // console.log(subject[0]);
     // res.status(200).json({success:true})
     try {
-        if(!subject){ 
+        if(!booktype){ 
             const resource = await Resource.find()
             return res.status(200).json({success:true, resource})
         }
-        if(subject[0] && subject[1]){
-            const resource0 = await Resource.find({bookType:subject[0]})
-            const resource1 = await Resource.find({bookType:subject[1]})
+        if(booktype[0] && booktype[1]){
+            const resource0 = await Resource.find({bookType:booktype[0]})
+            const resource1 = await Resource.find({bookType:booktype[1]})
             resource3 = resource0.concat(resource1)
             return res.status(200).json({success:true, resource3})
         }
-        if(subject[0]){
-            const resource0 = await Resource.find({bookType:subject[0]})
+        if(booktype[0]){
+            const resource0 = await Resource.find({bookType:booktype[0]})
             return res.status(200).json({success:true, resource0})
         }
         
