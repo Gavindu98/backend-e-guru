@@ -17,7 +17,7 @@ const verifyRoles = require('../../middleware/verifyRole')
 const USER_ROLES = require('../../config/userRoles')
 
 // tutor's routes
-router.route('/post-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), fileUploader.single('file'), postCreateHandler)
+router.route('/post-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.ADMIN), fileUploader.single('file'), postCreateHandler)
 router.route('/post-update').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), fileUploader.single('fileUpdate'), postUpdateHandler)
 router.route('/post-delete').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postDeleteHandler)
 router.route('/post-all-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postAllViewHandler)

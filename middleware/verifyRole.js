@@ -7,7 +7,7 @@ const verifyRoles = (...allowedRoles) => { // when passing much argument at onec
         console.log(rolesArray);
         const result = creatorRole.map(role => rolesArray.includes(role)).find(val => val === true)
         // console.log(result);
-        if(!result) return res.status(401).json({success: false, message: `User with email ${req.email} is not allowed for this route.`})
+        if(!result) return res.status(401).json({success: false, message: `User with email ${res.locals.mail} is not allowed for this route.`})
         next()
     }
 }
