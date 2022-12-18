@@ -1,4 +1,5 @@
 const Post = require('../../models/postModel')
+const User = require('../../models/userModel')
 
 const arrayCheck = (array, id) => {
         const checkResult = array.includes(id)
@@ -9,6 +10,8 @@ const postLikeHandler = async (req, res) => {
     const {postID, userID, booleanState} = req.params
     // console.log(userID);
     try {
+        const reqUser = await User.findOne({email:res.locals.mail})
+        if(reqUser.id !== userID) return res.status(401).json({success:false, message:'Unauthorized'})
         const post = await Post.findOne({_id:postID})
         // console.log(post);
         if(!post) return res.status(404).json({success:false, message:`Post with id ${postID} is not found`})
