@@ -21,9 +21,9 @@ app.use('/api/lesson', require('./routes/private/lessonRouter'))
 app.use('/api/resource', require('./routes/private/resourceRouter'))
 
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`App is listning to port: ${port}`);
 })
 
