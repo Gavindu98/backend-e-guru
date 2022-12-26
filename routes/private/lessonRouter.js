@@ -12,7 +12,7 @@ const lessonDeleteHandler = require('../../controllers/lessonController/lesson.d
 
 
 router.route('/lesson-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), fileUploader.single('lessonbanner'), lessonCreateHandler)
-router.route('/lesson-all-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR),lessonAllViewHandler)
+router.route('/lesson-all-view').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR),lessonAllViewHandler)
 router.route('/lesson-delete').post(lessonDeleteHandler)
 router.route('/lesson-like/:lessonID/action-owner/:userID/state/:booleanState').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), lessonLikeHandler)
 router.route('/lesson-single-view/:lessonID').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), lessonSingleViewHandler)
