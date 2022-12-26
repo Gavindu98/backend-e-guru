@@ -13,9 +13,8 @@ const postCreateHandler = async (req, res) => {
     if (!creatorMail) return res.status(410)
 
     // extract file details
-    const { filename, path } = req.file
-    console.log("path==>", path)
-    if (!filename) return res.status(410)
+    if (!req.file) return res.status(400)
+    const { filename } = req.file
     // console.log(filename);
     const localStoreDestination = path.join(`${path}/${filename}`)
     // const localStoreDestination = path.join(__dirname, `../../storage/images/${filename}`)
