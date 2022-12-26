@@ -21,6 +21,7 @@ app.use('/api/lesson', require('./routes/private/lessonRouter'))
 app.use('/api/resource', require('./routes/private/resourceRouter'))
 
 
+
 const port = process.env.PORT || 8080
 
 app.listen(port, ()=>{

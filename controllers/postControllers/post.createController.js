@@ -13,11 +13,14 @@ const postCreateHandler = async (req, res) => {
     if(!creatorMail) return res.status(410)
 
     // extract file details
-    if(!req.file) return res.status(400)
+    if(!req.file) {
+        return res.status(400).json({success: false, message: 'File is needed'})
+    } 
+    // console.log(req.file);
     const { filename } = req.file
     // console.log(filename);
     // const localStoreDestination = path.join(process.env.VIKUM_DIR, `storage/images/${filename}`, )
-    const localStoreDestination = `${process.env.VIKUM_DIR}/storage/images/${filename}`
+    const localStoreDestination = path.join(__dirname, '../','../',`/storage/images/${filename}`)
     // console.log(localStoreDestination);
     // return res.status(200).json({success: true})
     try {
