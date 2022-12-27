@@ -10,6 +10,7 @@ const postAllViewHandler = require('../../controllers/postControllers/post.all-v
 const postSingleViewHandler = require('../../controllers/postControllers/post.single-viewController')
 const postLikeHandler = require('../../controllers/postControllers/post.likeController')
 const { postDeleteHandler } = require('../../controllers/postControllers/post.deleteController')
+const topCreatorHandler = require('../../controllers/postControllers/post.top-creatorController')
 const fileUploader = require('../../middleware/fileUploader')
 const { postBodyValidation } = require('../../middleware/bodyValidation')
 const verifyAccessToken = require('../../middleware/verifyJWT')
@@ -23,6 +24,8 @@ router.route('/post-delete').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTO
 router.route('/post-all-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postAllViewHandler)
 router.route('/post-single-view/:postID').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postSingleViewHandler)
 router.route('/post-like/:postID/action-owner/:userID/state/:booleanState').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postLikeHandler)
+
+router.route('/top-post-creators').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), topCreatorHandler)
 
 router.route('/quection-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumCreateHandler)
 router.route('/forum-quection-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumAllViewHandler)
