@@ -10,19 +10,21 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
-    creator: {
-        email:{
-            type:String,
-            required: true
-        },
-        firstname:{
-            type:String,
-            required: true
-        },
-        lastname:{
-            type:String,
-            required: true
-        }
+    creatorFirstName:{
+        type: String,
+        required: true
+    },
+    creatorLastName:{
+        type: String,
+        required: true
+    },
+    creatorID:{
+        type: String,
+        required: true
+    },
+    creatorEmail:{
+        type: String,
+        required: true
     },
     filePath: {
         type: String,

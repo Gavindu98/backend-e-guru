@@ -14,7 +14,7 @@ const registrationHandler = async (req, res) => {
     if(duplication) return res.status(409).json({'message': `This email ${email} has been already registered`})
 
     let roleToInt = parseInt(role)
-    console.log(roleToInt);
+    // console.log(roleToInt);
 
     // role seperation/assigning
     switch (roleToInt) {
@@ -34,7 +34,7 @@ const registrationHandler = async (req, res) => {
     try {
         // pwd encryption
         const hashedPassword = await bcrypt.hash(pwd,10)
-        console.log(hashedPassword);
+        // console.log(hashedPassword);
 
         // create and save user in DB
         const newUser  = await User.create({
@@ -44,7 +44,7 @@ const registrationHandler = async (req, res) => {
             "password": hashedPassword,
             "role": role
         })
-        console.log(newUser);
+        // console.log(newUser);
         res.status(201).json({'message': `New user ${firstname} ${lastname} is successfully created!`})
     } catch (error) {
         res.status(500).json({'message': error.message})

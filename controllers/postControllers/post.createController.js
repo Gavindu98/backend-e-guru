@@ -29,11 +29,10 @@ const postCreateHandler = async (req, res) => {
         const newPost = await Post.create({
             "title": title,
             "description": description,
-            "creator": {
-                "email": creatorMail,
-                "firstname": user.firstname,
-                "lastname": user.lastname
-            },
+            "creatorFirstName": user.firstname,
+            "creatorLastName": user.lastname,
+            "creatorEmail": creatorMail,
+            "creatorID": user._id,
             "filePath": localStoreDestination
         })
 
