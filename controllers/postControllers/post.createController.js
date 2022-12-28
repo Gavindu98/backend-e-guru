@@ -1,7 +1,8 @@
 const Post = require('../../models/postModel')
 const User = require('../../models/userModel')
+const uploadImage = require('../../config/cloudnaryConfig')
 
-const { google } = require('googleapis')
+
 const path = require('path')
 
 const postCreateHandler = async (req, res) => {
@@ -17,13 +18,14 @@ const postCreateHandler = async (req, res) => {
         return res.status(400).json({ success: false, message: 'File is needed' })
     }
     // console.log(req.file);
-    const { filename } = req.file
+    const localPath = req.file.path
     // console.log(filename);
     // const localStoreDestination = path.join(process.env.VIKUM_DIR, `storage/images/${filename}`, )
-    const localStoreDestination = path.join(__dirname, '../', '../', `/storage/images/${filename}`)
+    // const localStoreDestination = path.join(__dirname, '../','../',`/storage/images/${filename}`)
     // console.log(localStoreDestination);
     // return res.status(200).json({success: true})
     try {
+        const imageUrl = await uploadImage(localPath)
         const user = await User.findOne({ email: creatorMail })
         // save post to db
         const newPost = await Post.create({
@@ -33,7 +35,7 @@ const postCreateHandler = async (req, res) => {
             "creatorLastName": user.lastname,
             "creatorEmail": creatorMail,
             "creatorID": user._id,
-            "filePath": localStoreDestination
+            "filePath": imageUrl
         })
 
         const post = await Post.findById(newPost._id)

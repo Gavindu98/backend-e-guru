@@ -1,5 +1,6 @@
 const Lesson = require('../../models/lessonModel')
 const User = require('../../models/userModel')
+const uploadImage = require('../../config/cloudnaryConfig')
 const path = require('path')
 const { join } = require('path')
 
@@ -31,8 +32,9 @@ const lessonCreateHandler = async (req, res) => {
             })
             return res.status(201).json({success:true, message:'Lesson has been created without lesson banner', lesson:newLesson })
         }else{
-            const { filename } = req.file
-            const localStoreDestination = path.join(__dirname, '../', '../', `/storage/images/${filename}`)
+            const localPath = req.file.path
+            const imageUrl = await uploadImage(localPath)
+            // const localStoreDestination = path.join(__dirname, '../', '../', `/storage/images/${filename}`)
             const newLesson = await Lesson.create({
                 'language': obj.language,
                 'grade': obj.grade,
@@ -40,7 +42,7 @@ const lessonCreateHandler = async (req, res) => {
                 'Chapter': obj.chapter,
                 'heading': obj.heading,
                 'content': obj.content,
-                'filePath': localStoreDestination,
+                'filePath': imageUrl,
                 'creatorFirstName': lessonCreator.firstname,
                 'creatorLastName': lessonCreator.lastname,
                 'creatorEmail': lessonCreator.email,
