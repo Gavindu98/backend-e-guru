@@ -6,17 +6,17 @@ const uploadImage = require('../../config/cloudnaryConfig')
 const path = require('path')
 
 const postCreateHandler = async (req, res) => {
-    const {title, description } = req.body
-    if(!title || !description ) return res.status(400).json({success: false, message: 'missing body value'})
+    const { title, description } = req.body
+    if (!title || !description) return res.status(400).json({ success: false, message: 'missing body value' })
 
     // extract creator details 
     const creatorMail = res.locals.mail // passing data from one to next middleware
-    if(!creatorMail) return res.status(410)
+    if (!creatorMail) return res.status(410)
 
     // extract file details
-    if(!req.file) {
-        return res.status(400).json({success: false, message: 'File is needed'})
-    } 
+    if (!req.file) {
+        return res.status(400).json({ success: false, message: 'File is needed' })
+    }
     // console.log(req.file);
     const localPath = req.file.path
     // console.log(filename);
@@ -26,7 +26,9 @@ const postCreateHandler = async (req, res) => {
     // return res.status(200).json({success: true})
     try {
         const imageUrl = await uploadImage(localPath)
-        const user = await User.findOne({email:creatorMail})
+        console.log('image url',imageUrl);
+        const user = await User.findOne({ email: creatorMail })
+        console.log('user',user);
         // save post to db
         const newPost = await Post.create({
             "title": title,
@@ -38,17 +40,19 @@ const postCreateHandler = async (req, res) => {
             "filePath": imageUrl
         })
 
-        const post = await Post.findById(newPost._id)
+        // const post = await Post.findById(newPost._id)
         
         // console.log(user.firstname);
-        // console.log(newPost);
-        return res.status(201).json({
-            success:true, 
+        console.log('new ', newPost);
+        res.status(201).json({
+            success: true,
             message: 'Post has been created',
-            post : post
+            post: newPost,
+            // path: path,
+            // localStoreDestination: localStoreDestination
         })
     } catch (error) {
-        res.status(401).json({success:false, message: 'Post creation is failed'})
+        res.status(500).json({ success: false, message: 'Post creation is failed' })
     }
 }
 

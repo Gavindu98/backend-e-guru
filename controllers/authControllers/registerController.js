@@ -24,6 +24,9 @@ const registrationHandler = async (req, res) => {
         case 2: 
             role = 'Tutor'
             break;
+        case 3: 
+            role = 'Admin'
+            break;
         default:
             role = 'Student'
     }
