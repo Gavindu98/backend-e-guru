@@ -1,6 +1,7 @@
 const Post = require('../../models/postModel')
 const path = require('path')
 const { fileOpt} = require('./post.deleteController')
+const uploadImage = require('../../config/cloudnaryConfig')
 
 const postUpdateHandler = async (req, res) => {
     const {titleUpdated, descriptionUpdated, postID} = req.body
@@ -12,23 +13,24 @@ const postUpdateHandler = async (req, res) => {
     
     // extract post details 
     try {
-        const post = await Post.findById(postID)
-        const pathLocation = post.filePath
+        let post = await Post.findById(postID)
         // console.log(post.creator);
-        if(post.creator.email != authorizedEmail) return res.status(401).json({success:false, message:'Unauthorized try'})
+        if(post.creatorEmail != authorizedEmail) return res.status(401).json({success:false, message:'Unauthorized try'})
         if (!req.file) {
             post.title = titleUpdated
             post.description = descriptionUpdated
             await post.save()
         } else {
-            const { filename } = req.file
-            const localStoreDestination = path.join(__dirname, '..', '..', `storage/images/${filename}`) 
+            const localPath = req.file.path
+            const imageUrl = await uploadImage(localPath)
+            // const localStoreDestination = path.join(__dirname, '..', '..', `storage/images/${filename}`) 
             post.title = titleUpdated
             post.description = descriptionUpdated
-            post.filePath = localStoreDestination
+            post.filePath = imageUrl
             await post.save()
-            // deletion of previous file    
-            fileOpt(pathLocation)
+            // deletion of previous file 
+                
+            // fileOpt(pathLocation)
         }
         return res.status(200).json({success:true, message:'Post successfully updated', updatedPost:post})
          

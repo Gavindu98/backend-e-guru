@@ -1,5 +1,6 @@
 const Resource = require('../../models/resourceModel')
 const User = require('../../models/userModel')
+const uploadImage = require('../../config/cloudnaryConfig')
 const path = require('path')
 const { join } = require('path')
 
@@ -11,18 +12,21 @@ const resourceCreateHandler = async (req, res) => {
     const creatorMail = res.locals.mail
     // res.status(200).json({success:true})
     if(!obj.language || !obj.bookType || !obj.title || !obj.description ) return res.status(400).json({success:false, message:'Some key value pairs are missed'})
-    if(!req.file) return res.status(400).json({success:true, message:'File is required'})
+    if(!req.file) {
+        return res.status(400).json({success:true, message:'File is required'})
+    }
 
     try {
         const resourceCreator = await User.findOne({email:creatorMail})
-        const { filename } = req.file
-            const localStoreDestination = path.join(__dirname, '../', '../', `/storage/images/${filename}`)
+        const localPath = req.file.path
+            const imageUrl = await uploadImage(localPath)
+            // const localStoreDestination = path.join(__dirname, '../', '../', `/storage/images/${filename}`)
             const newResource = await Resource.create({
                 'language': obj.language,
                 'bookType': obj.bookType,
                 'title': obj.title,
                 'description': obj.description,
-                'filePath': localStoreDestination,
+                'filePath': imageUrl,
                 'creatorFirstName': resourceCreator.firstname,
                 'creatorLastName': resourceCreator.lastname,
                 'creatorEmail': resourceCreator.email,
