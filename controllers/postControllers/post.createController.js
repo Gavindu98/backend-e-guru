@@ -42,7 +42,7 @@ const postCreateHandler = async (req, res) => {
         
         // console.log(user.firstname);
         // console.log(newPost);
-        res.status(201).json({
+        return res.status(201).json({
             success:true, 
             message: 'Post has been created',
             post : post
