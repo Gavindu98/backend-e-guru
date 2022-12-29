@@ -26,9 +26,9 @@ const postCreateHandler = async (req, res) => {
     // return res.status(200).json({success: true})
     try {
         const imageUrl = await uploadImage(localPath)
-        console.log('image url',imageUrl);
+        // console.log('image url',imageUrl);
         const user = await User.findOne({ email: creatorMail })
-        console.log('user',user);
+        // console.log('user',user);
         // save post to db
         const newPost = await Post.create({
             "title": title,
@@ -44,7 +44,7 @@ const postCreateHandler = async (req, res) => {
         // const post = await Post.findById(newPost._id)
         
         // console.log(user.firstname);
-        console.log('new ', newPost);
+        // console.log('new ', newPost);
         res.status(201).json({
             success: true,
             message: 'Post has been created',

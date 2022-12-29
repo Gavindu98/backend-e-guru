@@ -8,7 +8,7 @@ const postAllViewHandler = async (req, res) => {
     try {
         const posts = await Post.find()
         const user = await User.find({email:userEmail})
-        console.log(user);
+        // console.log(user);
         res.status(200).json({success:true, 
             message:'All posts are received', 
             posts:posts, 

@@ -22,7 +22,9 @@ const quectionAnswersHandler = async (req, res) => {
                     answer: data.answer,
                     userId: data.userId,
                     postID: data.postID,
-                    quectionId: data.quectionId
+                    quectionId: data.quectionId,
+                    creatorImgUrl: data.creatorImgUrl,
+                    role:data.role
                 };
             }
 

@@ -31,7 +31,9 @@ const forumCreateHandler = async (req, res) => {
                 "email": creatorMail,
                 "firstname": user.firstname,
                 "lastname": user.lastname
-            }
+            },
+            "creatorImgUrl": user.url,
+            "role":user.role
         })
 
         const forum = await Forum.findById(newForum._id)

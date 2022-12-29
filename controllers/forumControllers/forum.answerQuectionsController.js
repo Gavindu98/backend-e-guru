@@ -23,9 +23,9 @@ const answerQuectionHandler = async (req, res) => {
     // console.log(localStoreDestination);
     // return res.status(200).json({success: true})
     try {
-        console.log("run")
+        // console.log("run")
         const user = await User.findOne({ email: creatorMail })
-        console.log("user", user)
+        // console.log("user", user)
         // save post to db
         const newAnswer = await Answer.create({
             "userId": userId,
@@ -35,9 +35,11 @@ const answerQuectionHandler = async (req, res) => {
                 "email": creatorMail,
                 "firstname": user.firstname,
                 "lastname": user.lastname
-            }
+            },
+            "creatorImgUrl": user.url,
+            "role":user.role
         })
-        console.log("newAnswer", newAnswer)
+        // console.log("newAnswer", newAnswer)
         //const answer = await Answer.findById(newAnswer._id)
 
         //console.log("answer", answer)
@@ -45,7 +47,7 @@ const answerQuectionHandler = async (req, res) => {
         res.status(201).json({
             success: true,
             message: 'answer has been added',
-            //answer: answer
+            answer: newAnswer
         })
     } catch (error) {
         console.log("error", error)

@@ -6,7 +6,7 @@ cloudinary.config({
 });
 
 // Log the configuration
-console.log(cloudinary.config());
+// console.log(cloudinary.config());
 
 /////////////////////////
 // Uploads an image file
