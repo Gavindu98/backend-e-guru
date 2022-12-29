@@ -11,10 +11,10 @@ const resourceSingleViewHandler = require('../../controllers/resourceControllers
 const resourceAllViewHandler = require('../../controllers/resourceControllers/resource.all-viewController')
 
 
-router.route('/resource-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), fileUploader.single('file'), resourceCreateHandler)
-router.route('/resource-delete').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), resourceDeleteHandler)
-router.route('/resource-all-view').post(verifyAccessToken, verifyRoles(USER_ROLES.STUDENT,USER_ROLES.TUTOR), resourceAllViewHandler)
-router.route('/resource-single-view/:resourceID').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), resourceSingleViewHandler)
+router.route('/resource-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.ADMIN), fileUploader.single('file'), resourceCreateHandler)
+router.route('/resource-delete').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.ADMIN), resourceDeleteHandler)
+router.route('/resource-all-view').post(verifyAccessToken, verifyRoles(USER_ROLES.STUDENT,USER_ROLES.TUTOR, USER_ROLES.ADMIN), resourceAllViewHandler)
+router.route('/resource-single-view/:resourceID').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT, USER_ROLES.ADMIN), resourceSingleViewHandler)
 
 
 

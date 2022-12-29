@@ -19,17 +19,17 @@ const USER_ROLES = require('../../config/userRoles')
 
 // tutor's routes
 router.route('/post-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.ADMIN), fileUploader.single('file'), postCreateHandler)
-router.route('/post-update').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), fileUploader.single('fileUpdate'), postUpdateHandler)
-router.route('/post-delete').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postDeleteHandler)
-router.route('/post-all-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), postAllViewHandler)
-router.route('/post-single-view/:postID').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postSingleViewHandler)
-router.route('/post-like/:postID/action-owner/:userID/state/:booleanState').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT), postLikeHandler)
+router.route('/post-update').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR,USER_ROLES.ADMIN), fileUploader.single('fileUpdate'), postUpdateHandler)
+router.route('/post-delete').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR,USER_ROLES.ADMIN), postDeleteHandler)
+router.route('/post-all-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR,USER_ROLES.ADMIN, USER_ROLES.STUDENT), postAllViewHandler)
+router.route('/post-single-view/:postID').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT,USER_ROLES.ADMIN), postSingleViewHandler)
+router.route('/post-like/:postID/action-owner/:userID/state/:booleanState').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT,USER_ROLES.ADMIN), postLikeHandler)
 
-router.route('/top-post-creators').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), topCreatorHandler)
+router.route('/top-post-creators').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.ADMIN, USER_ROLES.STUDENT), topCreatorHandler)
 
-router.route('/quection-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumCreateHandler)
-router.route('/forum-quection-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), forumAllViewHandler)
-router.route('/forum-add-reply').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), answerQuectionHandler)
-router.route('/answers-for-singleQuection').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR), quectionAnswersHandler)
+router.route('/quection-create').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.ADMIN, USER_ROLES.STUDENT), forumCreateHandler)
+router.route('/forum-quection-view').get(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.ADMIN,USER_ROLES.STUDENT), forumAllViewHandler)
+router.route('/forum-add-reply').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.ADMIN, USER_ROLES.STUDENT), answerQuectionHandler)
+router.route('/answers-for-singleQuection').post(verifyAccessToken, verifyRoles(USER_ROLES.TUTOR, USER_ROLES.STUDENT, USER_ROLES.ADMIN), quectionAnswersHandler)
 
 module.exports = router
