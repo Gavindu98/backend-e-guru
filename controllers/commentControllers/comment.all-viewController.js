@@ -21,6 +21,8 @@ const commentAllViewHandler = async (req, res) => {
                 comment: data.commentContent,
                 userId: data.creator.id,
                 postID: data.postID,
+                creatorImgUrl:data.creatorImgUrl,
+                role:data.role
             };
         });
         return res.status(200).json({ commentArray })

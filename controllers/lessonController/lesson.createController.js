@@ -29,7 +29,8 @@ const lessonCreateHandler = async (req, res) => {
                 'creatorLastName': lessonCreator.lastname,
                 'creatorEmail': lessonCreator.email,
                 'creatorID': lessonCreator.id,
-                "creatorImgUrl": lessonCreator.url
+                "creatorImgUrl": lessonCreator.url,
+                "role": lessonCreator.role
             })
             return res.status(201).json({success:true, message:'Lesson has been created without lesson banner', lesson:newLesson })
         }else{
@@ -48,7 +49,8 @@ const lessonCreateHandler = async (req, res) => {
                 'creatorLastName': lessonCreator.lastname,
                 'creatorEmail': lessonCreator.email,
                 'creatorID': lessonCreator.id,
-                "creatorImgUrl": lessonCreator.url
+                "creatorImgUrl": lessonCreator.url,
+                "role": lessonCreator.role
             })
             return res.status(201).json({success:true, message:'Lesson has been created', lesson:newLesson })
         }   

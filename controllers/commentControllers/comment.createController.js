@@ -17,8 +17,12 @@ const commentCreateHandler = async (req, res) => {
                 "firstName": user.firstname,
                 "lastName": user.lastname
             },
+            "creatorImgUrl":user.url,
+            "role":user.role,
             "commentContent": comment
+            
         })
+        console.log(user.role);
         post.commentArray.push(userID)
         console.log('comment',post.commentArray );
         post.commentCount = post.commentArray.length

@@ -20,6 +20,14 @@ const commentSchema = new Schema({
             required: true
         }
     },
+    role: {
+        type: String,
+        required: true
+    },
+    creatorImgUrl: {
+        type: String,
+        required: true
+    },
     commentContent: {
         type: String,
         required: true

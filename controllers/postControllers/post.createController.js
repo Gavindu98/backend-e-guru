@@ -38,7 +38,8 @@ const postCreateHandler = async (req, res) => {
             "creatorEmail": creatorMail,
             "creatorID": user._id,
             "creatorImgUrl": user.url,
-            "filePath": imageUrl
+            "filePath": imageUrl,
+            "role":user.role
         })
 
         // const post = await Post.findById(newPost._id)
