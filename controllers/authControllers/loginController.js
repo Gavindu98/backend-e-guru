@@ -40,7 +40,7 @@ const loginHandler = async (req, res) => {
                 foundUser.refreshToken = refreshToken
                 const result = await foundUser.save()
                 res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000  } )
-                res.status(200).json({ accessToken, "email": result.email, "id": result._id , "firstname": result.firstname, "lastname": result.lastname, "role": result.role })
+                res.status(200).json({ accessToken, "email": result.email, "id": result._id , "firstname": result.firstname, "lastname": result.lastname, "role": result.role, "userImage":result.url })
         } catch (error) {
             res.status(500).json({success: false, message: error.message}) 
         }
