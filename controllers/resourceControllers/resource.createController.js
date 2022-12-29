@@ -30,7 +30,8 @@ const resourceCreateHandler = async (req, res) => {
                 'creatorFirstName': resourceCreator.firstname,
                 'creatorLastName': resourceCreator.lastname,
                 'creatorEmail': resourceCreator.email,
-                'creatorID': resourceCreator.id
+                'creatorID': resourceCreator.id,
+                "creatorImgUrl": resourceCreator.url
             })
             return res.status(201).json({success:true, message:'Resource has been created', newResource })
     } catch (error) {

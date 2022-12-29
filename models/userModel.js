@@ -29,6 +29,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    url: {
+        type: String,
+        required: false
+    },
     refreshToken: String,
     passwordResetToken: String,
     resetTokenExpired: String

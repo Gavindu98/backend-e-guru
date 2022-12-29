@@ -26,6 +26,10 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
+    creatorImgUrl: {
+        type: String,
+        required: true
+    },
     filePath: {
         type: String,
         required: true
@@ -37,6 +41,10 @@ const postSchema = new Schema({
     likeCount: {
         type: Number,
         default: 0
+    },
+    commentArray:{
+        type:[],
+        default: []
     },
     commentCount: {
         type: Number,

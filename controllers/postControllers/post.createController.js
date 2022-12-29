@@ -37,6 +37,7 @@ const postCreateHandler = async (req, res) => {
             "creatorLastName": user.lastname,
             "creatorEmail": creatorMail,
             "creatorID": user._id,
+            "creatorImgUrl": user.url,
             "filePath": imageUrl
         })
 

@@ -1,5 +1,6 @@
 const Comment = require('../../models/commentModel')
 const User = require('../../models/userModel')
+const Post = require('../../models/postModel')
 
 
 const commentCreateHandler = async (req, res) => {
@@ -8,7 +9,7 @@ const commentCreateHandler = async (req, res) => {
     
     try {
         const user = await User.findById(userID)
-        const post = await User.findById(postID)
+        const post = await Post.findById(postID)
         const newComment = await Comment.create({
             "postID": postID,
             "creator" : {
@@ -17,7 +18,11 @@ const commentCreateHandler = async (req, res) => {
                 "lastName": user.lastname
             },
             "commentContent": comment
-        }) 
+        })
+        post.commentArray.push(userID)
+        console.log('comment',post.commentArray );
+        post.commentCount = post.commentArray.length
+        await post.save() 
         return res.status(201).json({success:true, message:'Successfully commented', newComment})
     } catch (error) {
         return res.status(500).json({success:false, message: error.message})

@@ -54,6 +54,10 @@ const lessonSchema = new Schema({
         type: String,
         required: true
     },
+    creatorImgUrl: {
+        type: String,
+        required: true
+    },
     createdAt: {
         type: Date,
         default: new Date()
