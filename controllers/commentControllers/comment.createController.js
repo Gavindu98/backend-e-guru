@@ -17,7 +17,7 @@ const commentCreateHandler = async (req, res) => {
                 "firstName": user.firstname,
                 "lastName": user.lastname
             },
-            "creatorImgUrl":user.url,
+            "creatorImgUrl":user?.url? user.url: null,
             "role":user.role,
             "commentContent": comment
             

@@ -48,7 +48,7 @@ const resourceSchema = new Schema({
     },
     creatorImgUrl: {
         type: String,
-        required: true
+        required: false
     },
     role: {
         type: String,

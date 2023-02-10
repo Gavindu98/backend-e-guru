@@ -37,7 +37,7 @@ const postCreateHandler = async (req, res) => {
             "creatorLastName": user.lastname,
             "creatorEmail": creatorMail,
             "creatorID": user._id,
-            "creatorImgUrl": user.url,
+            "creatorImgUrl": user?.url? user.url: null,
             "filePath": imageUrl,
             "role":user.role
         })
@@ -46,15 +46,17 @@ const postCreateHandler = async (req, res) => {
         
         // console.log(user.firstname);
         // console.log('new ', newPost);
+        console.log(newPost);
         res.status(201).json({
             success: true,
             message: 'Post has been created',
             post: newPost,
             // path: path,
             // localStoreDestination: localStoreDestination
+            post: newPost,
         })
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Post creation is failed' })
+        res.status(500).json({ success: false, message: error.message })
     }
 }
 

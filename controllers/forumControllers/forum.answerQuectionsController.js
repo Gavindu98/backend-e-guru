@@ -36,7 +36,7 @@ const answerQuectionHandler = async (req, res) => {
                 "firstname": user.firstname,
                 "lastname": user.lastname
             },
-            "creatorImgUrl": user.url,
+            "creatorImgUrl": user?.url? user.url: null,
             "role":user.role
         })
         // console.log("newAnswer", newAnswer)

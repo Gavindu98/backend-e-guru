@@ -26,7 +26,7 @@ const commentSchema = new Schema({
     },
     creatorImgUrl: {
         type: String,
-        required: true
+        required: false
     },
     commentContent: {
         type: String,
